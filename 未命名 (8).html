@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宝箱专区</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF6B00',
+            secondary: '#FF9E00',
+            success: '#4CAF50',
+            gray: {
+              light: '#F5F5F5',
+              medium: '#E0E0E0',
+              dark: '#9E9E9E'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'dot-pulse': 'dot-pulse 1.5s infinite',
+            'open-box': 'open-box 1.5s forwards',
+            'fade-in': 'fade-in 0.5s forwards',
+            'slide-up': 'slide-up 0.5s forwards',
+            'zoom-in': 'zoom-in 0.5s forwards',
+          },
+          keyframes: {
+            'dot-pulse': {
+              '0%, 100%': { opacity: 0.2 },
+              '50%': { opacity: 1 },
+            },
+            'open-box': {
+              '0%': { transform: 'scaleY(0.8) translateY(20px)' },
+              '50%': { transform: 'scaleY(1.1) translateY(-10px)' },
+              '100%': { transform: 'scaleY(1) translateY(0)' },
+            },
+            'fade-in': {
+              '0%': { opacity: 0 },
+              '100%': { opacity: 1 },
+            },
+            'slide-up': {
+              '0%': { transform: 'translateY(20px)', opacity: 0 },
+              '100%': { transform: 'translateY(0)', opacity: 1 },
+            },
+            'zoom-in': {
+              '0%': { transform: 'scale(0.8)', opacity: 0 },
+              '100%': { transform: 'scale(1)', opacity: 1 },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .card-shadow {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+      .countdown-timer {
+        letter-spacing: 2px;
+      }
+      .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #333;
+        margin: 0 2px;
+      }
+      .dot-1 {
+        animation-delay: 0s;
+      }
+      .dot-2 {
+        animation-delay: 0.2s;
+      }
+      .dot-3 {
+        animation-delay: 0.4s;
+      }
+      .badge {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        transform: rotate(-15deg);
+        z-index: 10;
+      }
+      .winner-badge-container {
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .winner-badge-container:hover {
+        background-color: #e8f5e9;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-light min-h-screen font-sans text-gray-800">
+  <!-- 页面容器 -->
+  <div id="app" class="max-w-md mx-auto px-4 py-6">
+    <!-- 标题栏 -->
+    <header class="flex justify-between items-center mb-6">
+      <h1 id="pageTitle" class="text-2xl font-bold text-center flex-grow">宝箱专区</h1>
+      <button id="myParticipationBtn" class="text-primary text-sm font-medium">我的参与</button>
+    </header>
+
+    <!-- 主页面 - 宝箱专区 -->
+    <main id="treasureBoxPage" class="block">
+      <!-- 商品列表 -->
+      <div class="grid grid-cols-1 gap-4">
+        <!-- 商品1 -->
+        <div class="bg-white rounded-xl p-4 card-shadow">
+          <div class="relative">
+            <img src="https://p11-doubao-search-sign.byteimg.com/labis/image/84e2f2dbad524a0c4eaca29e4c72abf1~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=5Z4SGQAwODf1j1mGrP86DQZIGDo%3D" alt="iPhone 17 Pro Max" class="w-full h-48 object-contain mb-3">
+            <!-- 已中奖标签 -->
+            <div class="winner-badge badge hidden">
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="已中奖" class="w-20 h-20">
+            </div>
+          </div>
+          <h3 class="font-medium mb-1">[iPhone 17 Pro Max] 全新旗舰！现在参与就有机会免费拿！</h3>
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-gray-dark text-sm"><span id="participant-count-1">45678</span>人已参与</span>
+            <div class="flex items-center">
+              <span class="text-primary font-bold text-lg">¥0</span>
+              <span class="text-gray-dark text-xs line-through ml-1">¥5099</span>
+            </div>
+          </div>
+          <button data-id="1" class="participate-btn w-full py-2 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95">
+            免费抽奖
+          </button>
+        </div>
+
+        <!-- 商品2 -->
+        <div class="bg-white rounded-xl p-4 card-shadow">
+          <div class="relative">
+            <img src="https://p26-doubao-search-sign.byteimg.com/pgc-image/845bc0fa421d4a24b67dc41348f91766~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862262&x-signature=JcTePG5lgj4DxjuJQ9B0ZRNZIT8%3D" alt="MacBook Air M14" class="w-full h-48 object-contain mb-3">
+            <!-- 已中奖标签 -->
+            <div class="winner-badge badge hidden">
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="已中奖" class="w-20 h-20">
+            </div>
+          </div>
+          <h3 class="font-medium mb-1">[MacBook Air M14] 轻盈性能怪兽！优雅登场！</h3>
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-gray-dark text-sm"><span id="participant-count-2">18654</span>人已参与</span>
+            <div class="flex items-center">
+              <span class="text-primary font-bold text-lg">¥0</span>
+              <span class="text-gray-dark text-xs line-through ml-1">¥4499</span>
+            </div>
+          </div>
+          <button data-id="2" class="participate-btn w-full py-2 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95">
+            免费抽奖
+          </button>
+        </div>
+
+        <!-- 商品3 -->
+        <div class="bg-white rounded-xl p-4 card-shadow">
+          <div class="relative">
+            <img src="https://p11-doubao-search-sign.byteimg.com/labis/06a7c8bcbf822b79a42e36ae2d7fb1d3~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=l90lQWmyExNqOFAScN5xSVYQF8g%3D" alt="LV Neverfull 手提包" class="w-full h-48 object-contain mb-3">
+            <!-- 已中奖标签 -->
+            <div class="winner-badge badge hidden">
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="已中奖" class="w-20 h-20">
+            </div>
+          </div>
+          <h3 class="font-medium mb-1">[LV Neverfull 中号包] 经典老花，大容量，追求非凡气度</h3>
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-gray-dark text-sm"><span id="participant-count-3">35234</span>人已参与</span>
+            <div class="flex items-center">
+              <span class="text-primary font-bold text-lg">¥0</span>
+              <span class="text-gray-dark text-xs line-through ml-1">¥7900</span>
+            </div>
+          </div>
+          <button data-id="3" class="participate-btn w-full py-2 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95">
+            免费抽奖
+          </button>
+        </div>
+
+        <!-- 商品4 -->
+        <div class="bg-white rounded-xl p-4 card-shadow">
+          <div class="relative">
+            <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/297adad3d1d14eccb315c33b5dcc637a~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=hzcykICkscExv1fYVVh2sCM3PbA%3D" alt="HUAWEI Mate XT3" class="w-full h-48 object-contain mb-3">
+            <!-- 已中奖标签 -->
+            <div class="winner-badge badge hidden">
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="已中奖" class="w-20 h-20">
+            </div>
+          </div>
+          <h3 class="font-medium mb-1">[HUAWEI Mate XT3] 三折屏大屏手机0元带回家！</h3>
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-gray-dark text-sm"><span id="participant-count-4">58864</span>人已参与</span>
+            <div class="flex items-center">
+              <span class="text-primary font-bold text-lg">¥0</span>
+              <span class="text-gray-dark text-xs line-through ml-1">¥5099</span>
+            </div>
+          </div>
+          <button data-id="4" class="participate-btn w-full py-2 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95">
+            免费抽奖
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- 我的参与页面 -->
+    <main id="myParticipationPage" class="hidden">
+      <div class="flex justify-start items-center mb-4">
+        <button id="backToTreasureBtn" class="text-primary text-sm font-medium flex items-center">
+          <i class="fa fa-arrow-left mr-1"></i> 返回
+        </button>
+      </div>
+
+      <div id="participationList" class="grid grid-cols-1 gap-4">
+        <!-- 我的参与列表将通过JavaScript动态生成 -->
+        <div class="text-center py-8 text-gray-dark" id="emptyParticipation">
+          <p>您还没有参与任何抽奖</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- 开宝箱弹窗 -->
+    <div id="openBoxModal" class="fixed inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center z-50 hidden">
+      <div class="text-center w-5/6 max-w-sm">
+        <!-- 商品图片 -->
+        <div id="productImageContainer" class="relative w-64 h-64 mx-auto mb-4 animate-zoom-in">
+          <img id="drawProductImage" src="https://p11-doubao-search-sign.byteimg.com/labis/image/84e2f2dbad524a0c4eaca29e4c72abf1~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=5Z4SGQAwODf1j1mGrP86DQZIGDo%3D" alt="商品图片" class="w-full h-full object-contain">
+          <div id="boxOpening" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full">
+            <div class="text-white text-xl font-medium">
+              开奖中<span class="inline-flex ml-1">
+                <span class="dot dot-1 animate-dot-pulse"></span>
+                <span class="dot dot-2 animate-dot-pulse"></span>
+                <span class="dot dot-3 animate-dot-pulse"></span>
+              </span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 商品名称 -->
+        <p id="prizeName" class="text-white text-xl mb-6 font-bold">【iPhone 17 Pro Max】</p>
+        
+        <!-- 未中奖结果 -->
+        <div id="notWinResult" class="hidden animate-fade-in">
+          <div class="bg-white bg-opacity-90 rounded-2xl p-6 mb-6">
+            <div class="flex justify-center mb-4">
+              <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center">
+                <i class="fa fa-times text-red-500 text-3xl"></i>
+              </div>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2">很遗憾，未中奖</h3>
+            <p class="text-gray-dark text-center">继续参与其他抽奖，好运等着你！</p>
+          </div>
+          <button id="closeBoxModal" class="py-3 px-10 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95 text-lg">
+            关闭
+          </button>
+        </div>
+        
+        <!-- 优惠券中奖结果 -->
+        <div id="couponWinResult" class="hidden animate-fade-in">
+          <div class="bg-white bg-opacity-90 rounded-2xl p-6 mb-6 relative">
+            <!-- 关闭按钮 -->
+            <button id="closeCouponIcon" class="absolute top-4 right-4 text-gray-dark hover:text-gray-800 transition-colors">
+              <i class="fa fa-times text-xl"></i>
+            </button>
+            
+            <div class="flex justify-center mb-4">
+              <div class="w-20 h-20 bg-success/20 rounded-full flex items-center justify-center">
+                <i class="fa fa-ticket text-success text-3xl"></i>
+              </div>
+            </div>
+            <h3 class="text-xl font-bold text-center mb-2 text-success">恭喜您中奖了！</h3>
+            <p class="text-center font-medium mb-4">50元ok.com平台优惠券</p>
+            <p class="text-gray-dark text-center mb-4">请打开WhatsApp添加以下账号领取：</p>
+            <p class="text-center font-bold mb-6">971509216685</p>
+            <a href="https://wa.me/971509216685" target="_blank" class="block text-center py-2 bg-success text-white rounded-lg font-medium transition-all hover:bg-success/80 active:scale-95 mb-3">
+              <i class="fa fa-whatsapp mr-2"></i>打开WhatsApp
+            </a>
+          </div>
+          <button id="closeCouponModal" class="py-3 px-10 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95 text-lg">
+            已添加
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 我的参与页面的优惠券浮层 -->
+    <div id="participationCouponModal" class="fixed inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center z-50 hidden">
+      <div class="text-center w-5/6 max-w-sm">
+        <div class="bg-white bg-opacity-90 rounded-2xl p-6 relative">
+          <!-- 关闭按钮 -->
+          <button id="closeParticipationCoupon" class="absolute top-4 right-4 text-gray-dark hover:text-gray-800 transition-colors">
+            <i class="fa fa-times text-xl"></i>
+          </button>
+          
+          <div class="flex justify-center mb-4">
+            <div class="w-20 h-20 bg-success/20 rounded-full flex items-center justify-center">
+              <i class="fa fa-ticket text-success text-3xl"></i>
+            </div>
+          </div>
+          <h3 class="text-xl font-bold text-center mb-2 text-success">恭喜您中奖了！</h3>
+          <p class="text-center font-medium mb-4">50元ok.com平台优惠券</p>
+          <p class="text-gray-dark text-center mb-4">请打开WhatsApp添加以下账号领取：</p>
+          <p class="text-center font-bold mb-6">971509216685</p>
+          <a href="https://wa.me/971509216685" target="_blank" class="block text-center py-2 bg-success text-white rounded-lg font-medium transition-all hover:bg-success/80 active:scale-95 mb-3">
+            <i class="fa fa-whatsapp mr-2"></i>打开WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 抽奖次数上限提示 -->
+    <div id="limitToast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg text-sm hidden animate-fade-in">
+      每天只有3次机会哦~
+    </div>
+  </div>
+
+  <script>
+    // 模拟数据
+    const products = [
+      {
+        id: 1,
+        name: 'iPhone 17 Pro Max',
+        description: '[iPhone 17 Pro Max] 全新旗舰！现在参与就有机会免费拿！',
+        image: 'https://p11-doubao-search-sign.byteimg.com/labis/image/84e2f2dbad524a0c4eaca29e4c72abf1~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=5Z4SGQAwODf1j1mGrP86DQZIGDo%3D',
+        originalPrice: 5099,
+        participantCount: 45678
+      },
+      {
+        id: 2,
+        name: 'MacBook Air M14',
+        description: '[MacBook Air M14] 轻盈性能怪兽！优雅登场！',
+        image: 'https://p26-doubao-search-sign.byteimg.com/pgc-image/845bc0fa421d4a24b67dc41348f91766~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862262&x-signature=JcTePG5lgj4DxjuJQ9B0ZRNZIT8%3D',
+        originalPrice: 4499,
+        participantCount: 18654
+      },
+      {
+        id: 3,
+        name: 'LV Neverfull 中号包',
+        description: '[LV Neverfull 中号包] 经典老花，大容量，追求非凡气度',
+        image: 'https://p11-doubao-search-sign.byteimg.com/labis/06a7c8bcbf822b79a42e36ae2d7fb1d3~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=l90lQWmyExNqOFAScN5xSVYQF8g%3D',
+        originalPrice: 7900,
+        participantCount: 35234
+      },
+      {
+        id: 4,
+        name: 'HUAWEI Mate XT3',
+        description: '[HUAWEI Mate XT3] 三折屏大屏手机0元带回家！',
+        image: 'https://p11-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/297adad3d1d14eccb315c33b5dcc637a~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=hzcykICkscExv1fYVVh2sCM3PbA%3D',
+        originalPrice: 5099,
+        participantCount: 58864
+      }
+    ];
+
+    // 用户参与数据
+    let userParticipations = JSON.parse(localStorage.getItem('userParticipations')) || [];
+    let dailyParticipationCount = JSON.parse(localStorage.getItem('dailyParticipationCount')) || 0;
+    let lastParticipationDate = localStorage.getItem('lastParticipationDate') || '';
+    let hasWonCoupon = JSON.parse(localStorage.getItem('hasWonCoupon')) || false;
+
+    // 检查是否跨天，重置每日参与次数和优惠券中奖状态
+    const today = new Date().toDateString();
+    if (lastParticipationDate !== today) {
+      dailyParticipationCount = 0;
+      lastParticipationDate = today;
+      hasWonCoupon = false;
+      localStorage.setItem('dailyParticipationCount', JSON.stringify(dailyParticipationCount));
+      localStorage.setItem('lastParticipationDate', lastParticipationDate);
+      localStorage.setItem('hasWonCoupon', JSON.stringify(hasWonCoupon));
+    }
+
+    // DOM元素
+    const treasureBoxPage = document.getElementById('treasureBoxPage');
+    const myParticipationPage = document.getElementById('myParticipationPage');
+    const myParticipationBtn = document.getElementById('myParticipationBtn');
+    const backToTreasureBtn = document.getElementById('backToTreasureBtn');
+    const participateBtns = document.querySelectorAll('.participate-btn');
+    const openBoxModal = document.getElementById('openBoxModal');
+    const drawProductImage = document.getElementById('drawProductImage');
+    const boxOpening = document.getElementById('boxOpening');
+    const notWinResult = document.getElementById('notWinResult');
+    const couponWinResult = document.getElementById('couponWinResult');
+    const closeBoxModal = document.getElementById('closeBoxModal');
+    const closeCouponModal = document.getElementById('closeCouponModal');
+    const closeCouponIcon = document.getElementById('closeCouponIcon'); // 新增关闭图标按钮
+    const prizeName = document.getElementById('prizeName');
+    const limitToast = document.getElementById('limitToast');
+    const participationList = document.getElementById('participationList');
+    const emptyParticipation = document.getElementById('emptyParticipation');
+    const participationCouponModal = document.getElementById('participationCouponModal'); // 新增我的参与页面优惠券浮层
+    const closeParticipationCoupon = document.getElementById('closeParticipationCoupon'); // 新增关闭按钮
+
+    // 页面切换
+    myParticipationBtn.addEventListener('click', () => {
+      treasureBoxPage.classList.add('hidden');
+      myParticipationPage.classList.remove('hidden');
+      renderParticipationList();
+    });
+
+    backToTreasureBtn.addEventListener('click', () => {
+      myParticipationPage.classList.add('hidden');
+      treasureBoxPage.classList.remove('hidden');
+    });
+
+    // 参与抽奖
+    participateBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // 如果用户已中奖优惠券，直接返回不执行任何操作
+        if (hasWonCoupon) {
+          return;
+        }
+        
+        const productId = parseInt(btn.dataset.id);
+        const product = products.find(p => p.id === productId);
+        
+        // 检查每日参与次数
+        if (dailyParticipationCount >= 3) {
+          showToast(limitToast);
+          return;
+        }
+        
+        // 增加参与次数
+        dailyParticipationCount++;
+        localStorage.setItem('dailyParticipationCount', JSON.stringify(dailyParticipationCount));
+        
+        // 更新参与人数
+        product.participantCount++;
+        document.getElementById(`participant-count-${productId}`).textContent = product.participantCount.toLocaleString();
+        
+        // 添加到我的参与
+        const participation = {
+          productId,
+          productName: product.name,
+          productImage: product.image,
+          participateTime: new Date(),
+          isWinner: false // 默认未中奖
+        };
+        
+        // 首次抽奖必中优惠券
+        if (!hasWonCoupon) {
+          participation.isWinner = true;
+          hasWonCoupon = true;
+          localStorage.setItem('hasWonCoupon', JSON.stringify(hasWonCoupon));
+          
+          // 显示已中奖标签
+          const badge = btn.closest('.bg-white.rounded-xl.p-4.card-shadow').querySelector('.winner-badge');
+          badge.classList.remove('hidden');
+        }
+        
+        userParticipations.push(participation);
+        localStorage.setItem('userParticipations', JSON.stringify(userParticipations));
+        
+        // 更新按钮状态
+        btn.textContent = '已参与';
+        btn.classList.remove('bg-primary', 'hover:bg-secondary');
+        btn.classList.add('bg-gray-medium', 'cursor-not-allowed');
+        
+        // 显示开奖弹窗
+        openDrawModal(product, participation.isWinner);
+      });
+    });
+
+    // 关闭未中奖弹窗
+    closeBoxModal.addEventListener('click', () => {
+      openBoxModal.classList.add('hidden');
+      resetDrawModal();
+    });
+
+    // 关闭优惠券中奖弹窗（按钮）
+    closeCouponModal.addEventListener('click', () => {
+      openBoxModal.classList.add('hidden');
+      resetDrawModal();
+    });
+
+    // 关闭优惠券中奖弹窗（图标）
+    closeCouponIcon.addEventListener('click', () => {
+      openBoxModal.classList.add('hidden');
+      resetDrawModal();
+    });
+
+    // 关闭我的参与页面的优惠券浮层
+    closeParticipationCoupon.addEventListener('click', () => {
+      participationCouponModal.classList.add('hidden');
+    });
+
+    // 显示提示
+    function showToast(toastEl) {
+      toastEl.classList.remove('hidden');
+      setTimeout(() => {
+        toastEl.classList.add('hidden');
+      }, 1500);
+    }
+
+    // 打开抽奖弹窗
+    function openDrawModal(product, isCouponWinner) {
+      drawProductImage.src = product.image;
+      prizeName.textContent = `【${product.name}】`;
+      openBoxModal.classList.remove('hidden');
+      
+      // 1.5秒后显示结果
+      setTimeout(() => {
+        boxOpening.classList.add('hidden');
+        if (isCouponWinner) {
+          couponWinResult.classList.remove('hidden');
+        } else {
+          notWinResult.classList.remove('hidden');
+        }
+      }, 1500);
+    }
+
+    // 重置抽奖弹窗
+    function resetDrawModal() {
+      boxOpening.classList.remove('hidden');
+      notWinResult.classList.add('hidden');
+      couponWinResult.classList.add('hidden');
+    }
+
+    // 渲染我的参与列表
+    function renderParticipationList() {
+      // 清空列表
+      participationList.innerHTML = '';
+      
+      // 检查是否有参与记录
+      if (userParticipations.length === 0) {
+        emptyParticipation.classList.remove('hidden');
+        return;
+      }
+      
+      emptyParticipation.classList.add('hidden');
+      
+      // 排序：最新的在前
+      const sortedParticipations = [...userParticipations].sort((a, b) => {
+        return new Date(b.participateTime) - new Date(a.participateTime);
+      });
+      
+      // 创建列表项
+      sortedParticipations.forEach(participation => {
+        const product = products.find(p => p.id === participation.productId);
+        if (!product) return;
+        
+        const participationItem = document.createElement('div');
+        participationItem.className = 'bg-white rounded-xl p-4 card-shadow';
+        participationItem.innerHTML = `
+          <div class="relative">
+            ${participation.isWinner ? `
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="已中奖" class="w-20 h-20 badge">
+            ` : ''}
+            <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-contain mb-3">
+          </div>
+          <h3 class="font-medium mb-1">${product.description}</h3>
+          <div class="flex justify-between items-center mb-3">
+            <span class="text-gray-dark text-sm">${formatDate(participation.participateTime)}</span>
+            <div class="flex items-center">
+              <span class="text-primary font-bold text-lg">¥0</span>
+              <span class="text-gray-dark text-xs line-through ml-1">¥${product.originalPrice}</span>
+            </div>
+          </div>
+          <div class="winner-badge-container w-full py-2 rounded-lg font-medium text-center ${participation.isWinner ? 'bg-success/10 text-success' : 'bg-gray-medium text-gray-dark'}" 
+               ${participation.isWinner ? 'data-action="show-coupon"' : ''}>
+            ${participation.isWinner ? '恭喜！获得50元优惠券' : '未中奖'}
+          </div>
+        `;
+        
+        participationList.appendChild(participationItem);
+      });
+      
+      // 为所有中奖条目添加点击事件
+      document.querySelectorAll('[data-action="show-coupon"]').forEach(el => {
+        el.addEventListener('click', () => {
+          participationCouponModal.classList.remove('hidden');
+        });
+      });
+    }
+
+    // 格式化日期
+    function formatDate(date) {
+      const d = new Date(date);
+      const year = d.getFullYear();
+      const month = (d.getMonth() + 1).toString().padStart(2, '0');
+      const day = d.getDate().toString().padStart(2, '0');
+      const hours = d.getHours().toString().padStart(2, '0');
+      const minutes = d.getMinutes().toString().padStart(2, '0');
+      return `${year}-${month}-${day} ${hours}:${minutes}`;
+    }
+
+    // 初始化页面
+    function initPage() {
+      // 更新已参与商品的按钮状态
+      userParticipations.forEach(participation => {
+        const btn = document.querySelector(`.participate-btn[data-id="${participation.productId}"]`);
+        if (btn) {
+          btn.textContent = '已参与';
+          btn.classList.remove('bg-primary', 'hover:bg-secondary');
+          btn.classList.add('bg-gray-medium', 'cursor-not-allowed');
+          
+          // 如果中奖，显示已中奖标签
+          if (participation.isWinner) {
+            const badge = btn.closest('.bg-white.rounded-xl.p-4.card-shadow').querySelector('.winner-badge');
+            badge.classList.remove('hidden');
+          }
+        }
+      });
+    }
+
+    // 初始化
+    initPage();
+  </script>
+</body>
+</html>

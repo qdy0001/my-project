@@ -1,10 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>宝箱专区</title>
+  <title>Treasure Box Zone</title>
   <!-- Tailwind CSS v3 -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome -->
@@ -110,13 +110,13 @@
   <div id="app" class="max-w-md mx-auto px-4 py-6">
     <!-- 标题栏 -->
     <header class="flex justify-between items-center mb-6">
-      <h1 id="pageTitle" class="text-2xl font-bold text-center flex-grow">宝箱专区</h1>
-      <button id="myParticipationBtn" class="text-primary text-sm font-medium">我的参与</button>
+      <h1 id="pageTitle" class="text-2xl font-bold text-center flex-grow">Treasure Box Zone</h1>
+      <button id="myParticipationBtn" class="text-primary text-sm font-medium">My Participations</button>
     </header>
 
     <!-- 抽奖次数提示 -->
     <div class="bg-white rounded-lg p-3 mb-4 text-center text-sm">
-      今日剩余抽奖次数: <span id="remainingDraws" class="font-bold text-primary">3</span>/3
+      Today's remaining draws: <span id="remainingDraws" class="font-bold text-primary">3</span>/3
     </div>
 
     <!-- 主页面 - 宝箱专区 -->
@@ -129,19 +129,19 @@
             <img src="https://p11-doubao-search-sign.byteimg.com/labis/image/84e2f2dbad524a0c4eaca29e4c72abf1~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=5Z4SGQAwODf1j1mGrP86DQZIGDo%3D" alt="iPhone 17 Pro Max" class="w-full h-48 object-contain mb-3">
             <!-- 已中奖标签 -->
             <div class="winner-badge badge hidden">
-              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="已中奖" class="w-20 h-20">
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="Won" class="w-20 h-20">
             </div>
           </div>
-          <h3 class="font-medium mb-1">[iPhone 17 Pro Max] 全新旗舰！现在参与就有机会免费拿！</h3>
+          <h3 class="font-medium mb-1">[iPhone 17 Pro Max] New flagship! Participate now for a chance to win for free!</h3>
           <div class="flex justify-between items-center mb-3">
-            <span class="text-gray-dark text-sm"><span id="participant-count-1">45678</span>人已参与</span>
+            <span class="text-gray-dark text-sm"><span id="participant-count-1">45678</span> participants</span>
             <div class="flex items-center">
-              <span class="text-primary font-bold text-lg">¥0</span>
-              <span class="text-gray-dark text-xs line-through ml-1">¥5099</span>
+              <span class="text-primary font-bold text-lg">$0</span>
+              <span class="text-gray-dark text-xs line-through ml-1">$704</span>
             </div>
           </div>
           <button data-id="1" class="participate-btn w-full py-2 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95">
-            免费抽奖
+            Free Draw
           </button>
         </div>
 
@@ -151,41 +151,41 @@
             <img src="https://p26-doubao-search-sign.byteimg.com/pgc-image/845bc0fa421d4a24b67dc41348f91766~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862262&x-signature=JcTePG5lgj4DxjuJQ9B0ZRNZIT8%3D" alt="MacBook Air M14" class="w-full h-48 object-contain mb-3">
             <!-- 已中奖标签 -->
             <div class="winner-badge badge hidden">
-              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="已中奖" class="w-20 h-20">
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="Won" class="w-20 h-20">
             </div>
           </div>
-          <h3 class="font-medium mb-1">[MacBook Air M14] 轻盈性能怪兽！优雅登场！</h3>
+          <h3 class="font-medium mb-1">[MacBook Air M14] Lightweight performance monster! Elegantly launched!</h3>
           <div class="flex justify-between items-center mb-3">
-            <span class="text-gray-dark text-sm"><span id="participant-count-2">18654</span>人已参与</span>
+            <span class="text-gray-dark text-sm"><span id="participant-count-2">18654</span> participants</span>
             <div class="flex items-center">
-              <span class="text-primary font-bold text-lg">¥0</span>
-              <span class="text-gray-dark text-xs line-through ml-1">¥4499</span>
+              <span class="text-primary font-bold text-lg">$0</span>
+              <span class="text-gray-dark text-xs line-through ml-1">$617</span>
             </div>
           </div>
           <button data-id="2" class="participate-btn w-full py-2 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95">
-            免费抽奖
+            Free Draw
           </button>
         </div>
 
         <!-- 商品3 -->
         <div class="bg-white rounded-xl p-4 card-shadow">
           <div class="relative">
-            <img src="https://p11-doubao-search-sign.byteimg.com/labis/06a7c8bcbf822b79a42e36ae2d7fb1d3~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=l90lQWmyExNqOFAScN5xSVYQF8g%3D" alt="LV Neverfull 手提包" class="w-full h-48 object-contain mb-3">
+            <img src="https://p11-doubao-search-sign.byteimg.com/labis/06a7c8bcbf822b79a42e36ae2d7fb1d3~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=l90lQWmyExNqOFAScN5xSVYQF8g%3D" alt="LV Neverfull Handbag" class="w-full h-48 object-contain mb-3">
             <!-- 已中奖标签 -->
             <div class="winner-badge badge hidden">
-              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="已中奖" class="w-20 h-20">
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="Won" class="w-20 h-20">
             </div>
           </div>
-          <h3 class="font-medium mb-1">[LV Neverfull 中号包] 经典老花，大容量，追求非凡气度</h3>
+          <h3 class="font-medium mb-1">[LV Neverfull MM Bag] Classic monogram, large capacity, pursue extraordinary grace</h3>
           <div class="flex justify-between items-center mb-3">
-            <span class="text-gray-dark text-sm"><span id="participant-count-3">35234</span>人已参与</span>
+            <span class="text-gray-dark text-sm"><span id="participant-count-3">35234</span> participants</span>
             <div class="flex items-center">
-              <span class="text-primary font-bold text-lg">¥0</span>
-              <span class="text-gray-dark text-xs line-through ml-1">¥7900</span>
+              <span class="text-primary font-bold text-lg">$0</span>
+              <span class="text-gray-dark text-xs line-through ml-1">$1090</span>
             </div>
           </div>
           <button data-id="3" class="participate-btn w-full py-2 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95">
-            免费抽奖
+            Free Draw
           </button>
         </div>
 
@@ -195,19 +195,19 @@
             <img src="https://p11-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/297adad3d1d14eccb315c33b5dcc637a~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=hzcykICkscExv1fYVVh2sCM3PbA%3D" alt="HUAWEI Mate XT3" class="w-full h-48 object-contain mb-3">
             <!-- 已中奖标签 -->
             <div class="winner-badge badge hidden">
-              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="已中奖" class="w-20 h-20">
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="Won" class="w-20 h-20">
             </div>
           </div>
-          <h3 class="font-medium mb-1">[HUAWEI Mate XT3] 三折屏大屏手机0元带回家！</h3>
+          <h3 class="font-medium mb-1">[HUAWEI Mate XT3] Tri-fold screen large smartphone, take it home for $0!</h3>
           <div class="flex justify-between items-center mb-3">
-            <span class="text-gray-dark text-sm"><span id="participant-count-4">58864</span>人已参与</span>
+            <span class="text-gray-dark text-sm"><span id="participant-count-4">58864</span> participants</span>
             <div class="flex items-center">
-              <span class="text-primary font-bold text-lg">¥0</span>
-              <span class="text-gray-dark text-xs line-through ml-1">¥5099</span>
+              <span class="text-primary font-bold text-lg">$0</span>
+              <span class="text-gray-dark text-xs line-through ml-1">$704</span>
             </div>
           </div>
           <button data-id="4" class="participate-btn w-full py-2 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95">
-            免费抽奖
+            Free Draw
           </button>
         </div>
       </div>
@@ -217,14 +217,14 @@
     <main id="myParticipationPage" class="hidden">
       <div class="flex justify-start items-center mb-4">
         <button id="backToTreasureBtn" class="text-primary text-sm font-medium flex items-center">
-          <i class="fa fa-arrow-left mr-1"></i> 返回
+          <i class="fa fa-arrow-left mr-1"></i> Back
         </button>
       </div>
 
       <div id="participationList" class="grid grid-cols-1 gap-4">
         <!-- 我的参与列表将通过JavaScript动态生成 -->
         <div class="text-center py-8 text-gray-dark" id="emptyParticipation">
-          <p>您还没有参与任何抽奖</p>
+          <p>You haven't participated in any draws yet</p>
         </div>
       </div>
     </main>
@@ -234,10 +234,10 @@
       <div class="text-center w-5/6 max-w-sm">
         <!-- 商品图片 -->
         <div id="productImageContainer" class="relative w-64 h-64 mx-auto mb-4 animate-zoom-in">
-          <img id="drawProductImage" src="https://p11-doubao-search-sign.byteimg.com/labis/image/84e2f2dbad524a0c4eaca29e4c72abf1~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=5Z4SGQAwODf1j1mGrP86DQZIGDo%3D" alt="商品图片" class="w-full h-full object-contain">
+          <img id="drawProductImage" src="https://p11-doubao-search-sign.byteimg.com/labis/image/84e2f2dbad524a0c4eaca29e4c72abf1~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=5Z4SGQAwODf1j1mGrP86DQZIGDo%3D" alt="Product image" class="w-full h-full object-contain">
           <div id="boxOpening" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full">
             <div class="text-white text-xl font-medium">
-              开奖中<span class="inline-flex ml-1">
+              Drawing<span class="inline-flex ml-1">
                 <span class="dot dot-1 animate-dot-pulse"></span>
                 <span class="dot dot-2 animate-dot-pulse"></span>
                 <span class="dot dot-3 animate-dot-pulse"></span>
@@ -257,11 +257,11 @@
                 <i class="fa fa-times text-red-500 text-3xl"></i>
               </div>
             </div>
-            <h3 class="text-xl font-bold text-center mb-2">很遗憾，未中奖</h3>
-            <p class="text-gray-dark text-center">继续参与其他抽奖，好运等着你！</p>
+            <h3 class="text-xl font-bold text-center mb-2">Sorry, you didn't win</h3>
+            <p class="text-gray-dark text-center">Continue participating in other draws, good luck is waiting for you!</p>
           </div>
           <button id="closeBoxModal" class="py-3 px-10 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95 text-lg">
-            关闭
+            Close
           </button>
         </div>
         
@@ -278,16 +278,21 @@
                 <i class="fa fa-ticket text-success text-3xl"></i>
               </div>
             </div>
-            <h3 class="text-xl font-bold text-center mb-2 text-success">惊喜！虽然未中此商品，但您获得了意外奖励</h3>
-            <p class="text-center font-medium mb-4">50元ok.com平台优惠券</p>
-            <p class="text-gray-dark text-center mb-4">请打开WhatsApp添加以下账号领取：</p>
-            <p class="text-center font-bold mb-6">971509216685</p>
+            <h3 class="text-xl font-bold text-center mb-2 text-success">Surprise! Although you didn't win this product, you got an unexpected reward</h3>
+            <p class="text-center font-medium mb-4">$7 ok.com platform coupon</p>
+            <p class="text-gray-dark text-center mb-4">Please open WhatsApp and add the following account to claim:</p>
+            <p class="text-center font-bold mb-6 flex items-center justify-center">
+              971509216685
+              <button class="copy-btn ml-2 text-gray-dark hover:text-primary transition-colors" data-clipboard-text="971509216685">
+                <i class="fa fa-copy"></i>
+              </button>
+            </p>
             <a href="https://wa.me/971509216685" target="_blank" class="block text-center py-2 bg-success text-white rounded-lg font-medium transition-all hover:bg-success/80 active:scale-95 mb-3">
-              <i class="fa fa-whatsapp mr-2"></i>打开WhatsApp
+              <i class="fa fa-whatsapp mr-2"></i>Open WhatsApp
             </a>
           </div>
           <button id="closeCouponModal" class="py-3 px-10 bg-primary text-white rounded-lg font-medium transition-all hover:bg-secondary active:scale-95 text-lg">
-            已添加
+            Added
           </button>
         </div>
       </div>
@@ -307,12 +312,17 @@
               <i class="fa fa-ticket text-success text-3xl"></i>
             </div>
           </div>
-          <h3 class="text-xl font-bold text-center mb-2 text-success">惊喜！虽然未中此商品，但您获得了意外奖励</h3>
-          <p class="text-center font-medium mb-4">50元ok.com平台优惠券</p>
-          <p class="text-gray-dark text-center mb-4">请打开WhatsApp添加以下账号领取：</p>
-          <p class="text-center font-bold mb-6">971509216685</p>
+          <h3 class="text-xl font-bold text-center mb-2 text-success">Surprise! Although you didn't win this product, you got an unexpected reward</h3>
+          <p class="text-center font-medium mb-4">$7 ok.com platform coupon</p>
+          <p class="text-gray-dark text-center mb-4">Please open WhatsApp and add the following account to claim:</p>
+          <p class="text-center font-bold mb-6 flex items-center justify-center">
+            971509216685
+            <button class="copy-btn ml-2 text-gray-dark hover:text-primary transition-colors" data-clipboard-text="971509216685">
+              <i class="fa fa-copy"></i>
+            </button>
+          </p>
           <a href="https://wa.me/971509216685" target="_blank" class="block text-center py-2 bg-success text-white rounded-lg font-medium transition-all hover:bg-success/80 active:scale-95 mb-3">
-            <i class="fa fa-whatsapp mr-2"></i>打开WhatsApp
+            <i class="fa fa-whatsapp mr-2"></i>Open WhatsApp
           </a>
         </div>
       </div>
@@ -320,12 +330,12 @@
 
     <!-- 抽奖次数上限提示 -->
     <div id="limitToast" class="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-70 text-white px-4 py-2 rounded-lg text-sm hidden animate-fade-in">
-      每天只有3次机会哦~
+      Only 3 chances per day~
     </div>
   </div>
 
   <script>
-    // 格式化日期函数 - 新增的关键函数
+    // 格式化日期函数
     function formatDate(dateString) {
       const date = new Date(dateString);
       const hours = String(date.getHours()).padStart(2, '0');
@@ -333,39 +343,46 @@
       return `${hours}:${minutes}`;
     }
 
+    // 汇率设置 (1人民币 = 0.138美元)
+    const EXCHANGE_RATE = 0.138;
+    
     // 模拟数据
     const products = [
       {
         id: 1,
         name: 'iPhone 17 Pro Max',
-        description: '[iPhone 17 Pro Max] 全新旗舰！现在参与就有机会免费拿！',
+        description: '[iPhone 17 Pro Max] New flagship! Participate now for a chance to win for free!',
         image: 'https://p11-doubao-search-sign.byteimg.com/labis/image/84e2f2dbad524a0c4eaca29e4c72abf1~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=5Z4SGQAwODf1j1mGrP86DQZIGDo%3D',
         originalPrice: 5099,
-        participantCount: 45678
+        participantCount: 45678,
+        usdPrice: (5099 * EXCHANGE_RATE).toFixed(0)
       },
       {
         id: 2,
         name: 'MacBook Air M14',
-        description: '[MacBook Air M14] 轻盈性能怪兽！优雅登场！',
+        description: '[MacBook Air M14] Lightweight performance monster! Elegantly launched!',
         image: 'https://p26-doubao-search-sign.byteimg.com/pgc-image/845bc0fa421d4a24b67dc41348f91766~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862262&x-signature=JcTePG5lgj4DxjuJQ9B0ZRNZIT8%3D',
         originalPrice: 4499,
-        participantCount: 18654
+        participantCount: 18654,
+        usdPrice: (4499 * EXCHANGE_RATE).toFixed(0)
       },
       {
         id: 3,
-        name: 'LV Neverfull 中号包',
-        description: '[LV Neverfull 中号包] 经典老花，大容量，追求非凡气度',
+        name: 'LV Neverfull MM Bag',
+        description: '[LV Neverfull MM Bag] Classic monogram, large capacity, pursue extraordinary grace',
         image: 'https://p11-doubao-search-sign.byteimg.com/labis/06a7c8bcbf822b79a42e36ae2d7fb1d3~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=l90lQWmyExNqOFAScN5xSVYQF8g%3D',
         originalPrice: 7900,
-        participantCount: 35234
+        participantCount: 35234,
+        usdPrice: (7900 * EXCHANGE_RATE).toFixed(0)
       },
       {
         id: 4,
         name: 'HUAWEI Mate XT3',
-        description: '[HUAWEI Mate XT3] 三折屏大屏手机0元带回家！',
+        description: '[HUAWEI Mate XT3] Tri-fold screen large smartphone, take it home for $0!',
         image: 'https://p11-doubao-search-sign.byteimg.com/tos-cn-i-qvj2lq49k0/297adad3d1d14eccb315c33b5dcc637a~tplv-be4g95zd3a-image.jpeg?rk3s=542c0f93&x-expires=1777862715&x-signature=hzcykICkscExv1fYVVh2sCM3PbA%3D',
         originalPrice: 5099,
-        participantCount: 58864
+        participantCount: 58864,
+        usdPrice: (5099 * EXCHANGE_RATE).toFixed(0)
       }
     ];
 
@@ -478,7 +495,7 @@
         localStorage.setItem('userParticipations', JSON.stringify(userParticipations));
         
         // 更新按钮状态
-        btn.textContent = '已参与';
+        btn.textContent = 'Participated';
         btn.classList.remove('bg-primary', 'hover:bg-secondary');
         btn.classList.add('bg-gray-medium', 'cursor-not-allowed');
         
@@ -570,7 +587,7 @@
         participationItem.innerHTML = `
           <div class="relative">
             ${participation.isWinner ? `
-              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="已中奖" class="w-20 h-20 badge">
+              <img src="https://p3-flow-imagex-sign.byteimg.com/tos-cn-i-0004/6b84434aa8e43968692353299e331f~tplv-0-imagecrop_606x606:404x404.image?lk3s=f89d68d&x-expires=1763544123&x-signature=V2%2F8J6V6V5E7L1Q2tL%2BZ6zJz8p8%3D" alt="Won" class="w-20 h-20 badge">
             ` : ''}
             <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-contain mb-3">
           </div>
@@ -579,11 +596,11 @@
             <span class="text-gray-dark text-sm">${formatDate(participation.participateTime)}</span>
             ${participation.isWinner ? `
               <span class="px-2 py-1 bg-success/10 text-success text-xs rounded-full cursor-pointer winner-badge-container" data-id="${participation.productId}">
-                查看奖品
+                View Prize
               </span>
             ` : `
               <span class="px-2 py-1 bg-gray-100 text-gray-dark text-xs rounded-full">
-                未中奖
+                Not Won
               </span>
             `}
           </div>
@@ -600,6 +617,28 @@
         }
       });
     }
+
+    // 添加复制功能
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('.copy-btn')) {
+        const btn = e.target.closest('.copy-btn');
+        const text = btn.getAttribute('data-clipboard-text');
+        
+        // 复制到剪贴板
+        navigator.clipboard.writeText(text).then(() => {
+          // 显示复制成功提示
+          const originalIcon = btn.innerHTML;
+          btn.innerHTML = '<i class="fa fa-check"></i>';
+          btn.classList.add('text-success');
+          
+          // 2秒后恢复原始图标
+          setTimeout(() => {
+            btn.innerHTML = originalIcon;
+            btn.classList.remove('text-success');
+          }, 2000);
+        });
+      }
+    });
 
     // 初始化页面
     updateRemainingDraws();

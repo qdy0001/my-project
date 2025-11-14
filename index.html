@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -112,6 +113,11 @@
       <h1 id="pageTitle" class="text-2xl font-bold text-center flex-grow">宝箱专区</h1>
       <button id="myParticipationBtn" class="text-primary text-sm font-medium">我的参与</button>
     </header>
+
+    <!-- 抽奖次数提示 -->
+    <div class="bg-white rounded-lg p-3 mb-4 text-center text-sm">
+      今日剩余抽奖次数: <span id="remainingDraws" class="font-bold text-primary">3</span>/3
+    </div>
 
     <!-- 主页面 - 宝箱专区 -->
     <main id="treasureBoxPage" class="block">
@@ -272,7 +278,7 @@
                 <i class="fa fa-ticket text-success text-3xl"></i>
               </div>
             </div>
-            <h3 class="text-xl font-bold text-center mb-2 text-success">恭喜您中奖了！</h3>
+            <h3 class="text-xl font-bold text-center mb-2 text-success">惊喜！虽然未中此商品，但您获得了意外奖励</h3>
             <p class="text-center font-medium mb-4">50元ok.com平台优惠券</p>
             <p class="text-gray-dark text-center mb-4">请打开WhatsApp添加以下账号领取：</p>
             <p class="text-center font-bold mb-6">971509216685</p>
@@ -301,7 +307,7 @@
               <i class="fa fa-ticket text-success text-3xl"></i>
             </div>
           </div>
-          <h3 class="text-xl font-bold text-center mb-2 text-success">恭喜您中奖了！</h3>
+          <h3 class="text-xl font-bold text-center mb-2 text-success">惊喜！虽然未中此商品，但您获得了意外奖励</h3>
           <p class="text-center font-medium mb-4">50元ok.com平台优惠券</p>
           <p class="text-gray-dark text-center mb-4">请打开WhatsApp添加以下账号领取：</p>
           <p class="text-center font-bold mb-6">971509216685</p>
@@ -319,6 +325,14 @@
   </div>
 
   <script>
+    // 格式化日期函数 - 新增的关键函数
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      return `${hours}:${minutes}`;
+    }
+
     // 模拟数据
     const products = [
       {
@@ -372,6 +386,12 @@
       localStorage.setItem('hasWonCoupon', JSON.stringify(hasWonCoupon));
     }
 
+    // 更新剩余抽奖次数显示
+    function updateRemainingDraws() {
+      const remaining = 3 - dailyParticipationCount;
+      document.getElementById('remainingDraws').textContent = remaining;
+    }
+
     // DOM元素
     const treasureBoxPage = document.getElementById('treasureBoxPage');
     const myParticipationPage = document.getElementById('myParticipationPage');
@@ -385,13 +405,13 @@
     const couponWinResult = document.getElementById('couponWinResult');
     const closeBoxModal = document.getElementById('closeBoxModal');
     const closeCouponModal = document.getElementById('closeCouponModal');
-    const closeCouponIcon = document.getElementById('closeCouponIcon'); // 新增关闭图标按钮
+    const closeCouponIcon = document.getElementById('closeCouponIcon');
     const prizeName = document.getElementById('prizeName');
     const limitToast = document.getElementById('limitToast');
     const participationList = document.getElementById('participationList');
     const emptyParticipation = document.getElementById('emptyParticipation');
-    const participationCouponModal = document.getElementById('participationCouponModal'); // 新增我的参与页面优惠券浮层
-    const closeParticipationCoupon = document.getElementById('closeParticipationCoupon'); // 新增关闭按钮
+    const participationCouponModal = document.getElementById('participationCouponModal');
+    const closeParticipationCoupon = document.getElementById('closeParticipationCoupon');
 
     // 页面切换
     myParticipationBtn.addEventListener('click', () => {
@@ -408,13 +428,14 @@
     // 参与抽奖
     participateBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        // 如果用户已中奖优惠券，直接返回不执行任何操作
-        if (hasWonCoupon) {
+        // 检查该商品是否已参与
+        const productId = parseInt(btn.dataset.id);
+        const alreadyParticipated = userParticipations.some(p => p.productId === productId);
+        
+        if (alreadyParticipated) {
+          // 已参与该商品，不执行任何操作
           return;
         }
-        
-        const productId = parseInt(btn.dataset.id);
-        const product = products.find(p => p.id === productId);
         
         // 检查每日参与次数
         if (dailyParticipationCount >= 3) {
@@ -422,9 +443,12 @@
           return;
         }
         
+        const product = products.find(p => p.id === productId);
+        
         // 增加参与次数
         dailyParticipationCount++;
         localStorage.setItem('dailyParticipationCount', JSON.stringify(dailyParticipationCount));
+        updateRemainingDraws(); // 更新剩余次数显示
         
         // 更新参与人数
         product.participantCount++;
@@ -553,60 +577,32 @@
           <h3 class="font-medium mb-1">${product.description}</h3>
           <div class="flex justify-between items-center mb-3">
             <span class="text-gray-dark text-sm">${formatDate(participation.participateTime)}</span>
-            <div class="flex items-center">
-              <span class="text-primary font-bold text-lg">¥0</span>
-              <span class="text-gray-dark text-xs line-through ml-1">¥${product.originalPrice}</span>
-            </div>
-          </div>
-          <div class="winner-badge-container w-full py-2 rounded-lg font-medium text-center ${participation.isWinner ? 'bg-success/10 text-success' : 'bg-gray-medium text-gray-dark'}" 
-               ${participation.isWinner ? 'data-action="show-coupon"' : ''}>
-            ${participation.isWinner ? '恭喜！获得50元优惠券' : '未中奖'}
+            ${participation.isWinner ? `
+              <span class="px-2 py-1 bg-success/10 text-success text-xs rounded-full cursor-pointer winner-badge-container" data-id="${participation.productId}">
+                查看奖品
+              </span>
+            ` : `
+              <span class="px-2 py-1 bg-gray-100 text-gray-dark text-xs rounded-full">
+                未中奖
+              </span>
+            `}
           </div>
         `;
         
         participationList.appendChild(participationItem);
-      });
-      
-      // 为所有中奖条目添加点击事件
-      document.querySelectorAll('[data-action="show-coupon"]').forEach(el => {
-        el.addEventListener('click', () => {
-          participationCouponModal.classList.remove('hidden');
-        });
-      });
-    }
-
-    // 格式化日期
-    function formatDate(date) {
-      const d = new Date(date);
-      const year = d.getFullYear();
-      const month = (d.getMonth() + 1).toString().padStart(2, '0');
-      const day = d.getDate().toString().padStart(2, '0');
-      const hours = d.getHours().toString().padStart(2, '0');
-      const minutes = d.getMinutes().toString().padStart(2, '0');
-      return `${year}-${month}-${day} ${hours}:${minutes}`;
-    }
-
-    // 初始化页面
-    function initPage() {
-      // 更新已参与商品的按钮状态
-      userParticipations.forEach(participation => {
-        const btn = document.querySelector(`.participate-btn[data-id="${participation.productId}"]`);
-        if (btn) {
-          btn.textContent = '已参与';
-          btn.classList.remove('bg-primary', 'hover:bg-secondary');
-          btn.classList.add('bg-gray-medium', 'cursor-not-allowed');
-          
-          // 如果中奖，显示已中奖标签
-          if (participation.isWinner) {
-            const badge = btn.closest('.bg-white.rounded-xl.p-4.card-shadow').querySelector('.winner-badge');
-            badge.classList.remove('hidden');
-          }
+        
+        // 添加中奖记录的点击事件
+        if (participation.isWinner) {
+          const winnerBadge = participationItem.querySelector('.winner-badge-container');
+          winnerBadge.addEventListener('click', () => {
+            participationCouponModal.classList.remove('hidden');
+          });
         }
       });
     }
 
-    // 初始化
-    initPage();
+    // 初始化页面
+    updateRemainingDraws();
   </script>
 </body>
 </html>
